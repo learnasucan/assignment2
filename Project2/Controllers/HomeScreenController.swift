@@ -7,34 +7,21 @@
 
 import UIKit
 
-let kNumberOfproductsInGrid = 3
-
 class HomeScreenController: UIViewController {
     
-    var components: [Component] = []
+    private var components: [Component] = []
+    private let numberOfproductsInGrid = 3
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var searchBar: UISearchBar!
     
     //MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Load data from JSON file
-        loadDataFromJsonFile(name: "data", fileType: "json")
-        
-        // Set up collection view
-        registerCollectionViewCells()
-        
-        //  Set up compositional layout
-        setupCompositionalLayout()
-        
-        searchBar.delegate = self
-        
+        setupData()
     }
-
+    
 }
 
 //MARK: - Delegates
@@ -57,39 +44,50 @@ extension HomeScreenController: UICollectionViewDataSource {
         switch component.type {
         case .image:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as? ImageCell else {
-                fatalError("Failed to dequeue ImageCell.")
+                return UICollectionViewCell()
             }
             cell.configure(with: cellData)
             return cell
             
         case .grid:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridCell", for: indexPath) as? GridCell else {
-                fatalError("Failed to dequeue GridCell.")
+                return UICollectionViewCell()
             }
             cell.configure(with: cellData)
             return cell
             
         case .list:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListCell", for: indexPath) as? ListCell else {
-                fatalError("Failed to dequeue ListCell.")
+                return UICollectionViewCell()
             }
             cell.configure(with: cellData)
             return cell
             
         case .none:
             return UICollectionViewCell()
-            
         }
     }
-    
     
 }
 
 //MARK: - Helpers
 
-extension HomeScreenController {
+private extension HomeScreenController {
     
-    fileprivate func loadDataFromJsonFile(name: String, fileType: String) {
+    private func setupData() {
+        // Load data from JSON file
+        loadDataFromJsonFile(name: "data", fileType: "json")
+        
+        // Set up collection view
+        registerCollectionViewCells()
+        
+        //  Set up compositional layout
+        setupCompositionalLayout()
+        
+        searchBar.delegate = self
+    }
+    
+    private func loadDataFromJsonFile(name: String, fileType: String) {
         
         if let path = Bundle.main.path(forResource: "data", ofType: "json") {
             do {
@@ -103,7 +101,7 @@ extension HomeScreenController {
         }
     }
     
-    fileprivate func registerCollectionViewCells() {
+    private func registerCollectionViewCells() {
         
         collectionView.register(UINib(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
         collectionView.register(UINib(nibName: "GridCell", bundle: nil), forCellWithReuseIdentifier: "GridCell")
@@ -111,7 +109,7 @@ extension HomeScreenController {
     }
     
     
-    fileprivate func setupCompositionalLayout() {
+    private func setupCompositionalLayout() {
         
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
             return self.sectionLayout(for: sectionIndex)
@@ -119,7 +117,7 @@ extension HomeScreenController {
         collectionView.collectionViewLayout = layout
     }
     
-    fileprivate func sectionLayout(for sectionIndex: Int) -> NSCollectionLayoutSection {
+    private func sectionLayout(for sectionIndex: Int) -> NSCollectionLayoutSection {
         // Determine the layout for the section based on the component type
         var component = components[sectionIndex]
         
@@ -129,7 +127,7 @@ extension HomeScreenController {
         case .image:
             section = createImageSection()
         case .grid:
-            section = createGridSection(cellsCount: kNumberOfproductsInGrid)
+            section = createGridSection(cellsCount: numberOfproductsInGrid)
         case .list:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(180))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -144,7 +142,7 @@ extension HomeScreenController {
         return section
     }
     
-    func createImageSection() -> NSCollectionLayoutSection {
+    private func createImageSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(200))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
@@ -152,28 +150,23 @@ extension HomeScreenController {
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
         
         let section = NSCollectionLayoutSection(group: group)
-//        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
         return section
     }
     
-    func createGridSection(cellsCount: Int) -> NSCollectionLayoutSection {
+    private func createGridSection(cellsCount: Int) -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(200))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         //if edge required
-        //item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(200))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: kNumberOfproductsInGrid)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: numberOfproductsInGrid)
         
         //scrolling behavour for 3 cell display
         let section = NSCollectionLayoutSection(group: group)
-//        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-//        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
-        
         return section
     }
     
-    func createListSection(cellsCount: Int) -> NSCollectionLayoutSection {
+    private func createListSection(cellsCount: Int) -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(220))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
@@ -190,13 +183,13 @@ extension HomeScreenController {
 
 
 extension HomeScreenController: UISearchResultsUpdating, UISearchBarDelegate {
-
+    
     func updateSearchResults(for searchController: UISearchController) {
-           // Your search code here
-       }
-
-       func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-           // Your cancel button code here
-       }
+        // Your search code here
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        // Your cancel button code here
+    }
     
 }
