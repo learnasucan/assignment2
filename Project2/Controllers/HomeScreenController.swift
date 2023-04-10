@@ -9,8 +9,8 @@ import UIKit
 
 class HomeScreenController: UIViewController {
     
-    private var components: [Component] = []
-    private let numberOfproductsInGrid = 3
+    var components: [Component] = []
+    let numberOfproductsInGrid = 3
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -119,7 +119,7 @@ private extension HomeScreenController {
     
     private func sectionLayout(for sectionIndex: Int) -> NSCollectionLayoutSection {
         // Determine the layout for the section based on the component type
-        var component = components[sectionIndex]
+        let component = components[sectionIndex]
         
         let section: NSCollectionLayoutSection
         
