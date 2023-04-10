@@ -22,7 +22,6 @@
 		88CDC76529DC876500F2FACF /* HomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CDC76429DC876500F2FACF /* HomeScreenController.swift */; };
 		88CDC76E29DC8A5D00F2FACF /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CDC76C29DC8A5D00F2FACF /* ImageCell.swift */; };
 		88CDC77729DCA4D700F2FACF /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88CDC77629DCA4D600F2FACF /* ImageCell.xib */; };
-		88CDC78629DDF3FB00F2FACF /* CustomTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CDC78529DDF3FB00F2FACF /* CustomTableView.swift */; };
 		88DA2C5929E1709600C4A315 /* DmartGreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DA2C5829E1709600C4A315 /* DmartGreenButton.swift */; };
 		88DA2C5B29E174D000C4A315 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DA2C5A29E174D000C4A315 /* UIColor+Extension.swift */; };
 		88DA2C5D29E1755100C4A315 /* DmartColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DA2C5C29E1755100C4A315 /* DmartColors.swift */; };
@@ -51,7 +50,6 @@
 		88CDC76629DC87AD00F2FACF /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		88CDC76C29DC8A5D00F2FACF /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		88CDC77629DCA4D600F2FACF /* ImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
-		88CDC78529DDF3FB00F2FACF /* CustomTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableView.swift; sourceTree = "<group>"; };
 		88DA2C5829E1709600C4A315 /* DmartGreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DmartGreenButton.swift; sourceTree = "<group>"; };
 		88DA2C5A29E174D000C4A315 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		88DA2C5C29E1755100C4A315 /* DmartColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DmartColors.swift; sourceTree = "<group>"; };
@@ -153,7 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				88DA2C5A29E174D000C4A315 /* UIColor+Extension.swift */,
-				88CDC78529DDF3FB00F2FACF /* CustomTableView.swift */,
 				88CDC75D29DC590800F2FACF /* CustomImageView.swift */,
 				88DA2C5829E1709600C4A315 /* DmartGreenButton.swift */,
 				88DA2C5C29E1755100C4A315 /* DmartColors.swift */,
@@ -254,7 +251,6 @@
 			files = (
 				88CDC75E29DC590800F2FACF /* CustomImageView.swift in Sources */,
 				88CDC76529DC876500F2FACF /* HomeScreenController.swift in Sources */,
-				88CDC78629DDF3FB00F2FACF /* CustomTableView.swift in Sources */,
 				88DA2C6729E1C18B00C4A315 /* Int+Extension.swift in Sources */,
 				88DA2C5929E1709600C4A315 /* DmartGreenButton.swift in Sources */,
 				887DF4A829DFB3CD0004BF72 /* ListCell.swift in Sources */,
